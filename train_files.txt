@@ -1,3 +1,0 @@
-data-0.h5
-data-1.h5
-data-2.h5

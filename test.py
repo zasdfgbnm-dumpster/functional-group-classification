@@ -8,9 +8,9 @@ net = caffe.Net(modelfn,modelwfn,caffe.TEST)
 
 dbsize = 3000
 batchsize = 60
-testdb = h5py.File('test.h5')
 
-def run_test(net,weight):
+def run_test(net,weight,testdbfn):
+	testdb = h5py.File(testdbfn)
 	countpp = 0
 	countpn = 0
 	countnp = 0

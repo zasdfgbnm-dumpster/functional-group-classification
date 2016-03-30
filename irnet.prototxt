@@ -6,11 +6,11 @@ layer {
 		phase: TRAIN
 	}
 	hdf5_data_param {
-		source: "<cross_validation_train>.txt"
+		source: "train-<cv>.txt"
 		batch_size: 60
 	}
 	top: "data"
-	top: "<mylabel>"
+	top: "<label>"
 }
 layer {
 	name: "irdata"
@@ -19,11 +19,11 @@ layer {
 		phase: TEST
 	}
 	hdf5_data_param {
-		source: "<cross_validation_test>.txt"
+		source: "test-<cv>.txt"
 		batch_size: 60
 	}
 	top: "data"
-	top: "<mylabel>"
+	top: "<label>"
 }
 layer {
   name: "conv1"
@@ -149,13 +149,13 @@ layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "ip2"
-  bottom: "<mylabel>"
+  bottom: "<label>"
   top: "accuracy"
 }
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
   bottom: "ip2"
-  bottom: "<mylabel>"
+  bottom: "<label>"
   top: "loss"
 }
