@@ -3,3 +3,16 @@ __pycache__
 *.caffemodel
 *.solverstate
 *.log
+irnet-0.prototxt
+irnet-1.prototxt
+irnet-2.prototxt
+solver-0.prototxt
+solver-1.prototxt
+solver-2.prototxt
+test-0.txt
+test-1.txt
+test-2.txt
+train-0.txt
+train-1.txt
+train-2.txt
+
