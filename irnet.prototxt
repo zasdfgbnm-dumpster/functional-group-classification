@@ -6,11 +6,11 @@ layer {
 		phase: TRAIN
 	}
 	hdf5_data_param {
-		source: "train_files.txt"
+		source: "<cross_validation_train>.txt"
 		batch_size: 60
 	}
 	top: "data"
-	top: "labelC2O"
+	top: "<mylabel>"
 }
 layer {
 	name: "irdata"
@@ -19,11 +19,11 @@ layer {
 		phase: TEST
 	}
 	hdf5_data_param {
-		source: "test_files.txt"
+		source: "<cross_validation_test>.txt"
 		batch_size: 60
 	}
 	top: "data"
-	top: "labelC2O"
+	top: "<mylabel>"
 }
 layer {
   name: "conv1"
@@ -149,13 +149,13 @@ layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "ip2"
-  bottom: "labelC2O"
+  bottom: "<mylabel>"
   top: "accuracy"
 }
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
   bottom: "ip2"
-  bottom: "labelC2O"
+  bottom: "<mylabel>"
   top: "loss"
 }
