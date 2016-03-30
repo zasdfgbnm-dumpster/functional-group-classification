@@ -45,8 +45,6 @@ for x,y in zip(extractors,counts):
 	print( x.name, y, 1.0*y/(num_total) )
 
 # write database
-trainf = h5py.File('train.h5','w')
-testf = h5py.File('test.h5','w')
 offset = 0
 for i in range(num_pieces):
 	# dimensions are (periodNum,channel,width,height)
