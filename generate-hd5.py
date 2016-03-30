@@ -5,8 +5,9 @@ from feature_extractor import smiles_searcher,or_extractor
 from random import shuffle
 import numpy
 
-num_train = 10000
-num_test = 2000
+num_total = 12000
+num_split = 3000
+num_pieces = int(num_total/num_split)
 dimir = 759
 
 extractors = [
@@ -32,7 +33,7 @@ for i in fdb:
 
 # keep only num_test+num_train items with highest enabled bits in features
 irdb.sort(key=lambda x : sum(x[2]),reverse=True)
-irdb = irdb[:num_train+num_test]
+irdb = irdb[:num_total]
 shuffle(irdb)
 
 # do some statistics
@@ -41,22 +42,23 @@ counts = [ 0 for x in extractors ]
 for x,y,features in irdb:
 	counts = [ x+int(y) for x,y in zip(counts,features) ]
 for x,y in zip(extractors,counts):
-	print( x.name, y, 1.0*y/(num_test+num_train) )
+	print( x.name, y, 1.0*y/(num_total) )
 
 # write database
 trainf = h5py.File('train.h5','w')
 testf = h5py.File('test.h5','w')
 offset = 0
-for f,n in [(trainf,num_train),(testf,num_test)]:
+for i in range(num_pieces):
 	# dimensions are (periodNum,channel,width,height)
-	f.create_dataset('data',(n,1,1,dimir),dtype='f8')
-	f.create_dataset('nist_id',(n,),dtype=h5py.special_dtype(vlen=bytes))
-	for (myid,ir,features),index in zip(irdb[offset:offset+n],range(n)):
+	f = h5py.File('data-{}.h5'.format(i),'w')
+	f.create_dataset('data',(num_split,1,1,dimir),dtype='f8')
+	f.create_dataset('nist_id',(num_split,),dtype=h5py.special_dtype(vlen=bytes))
+	for (myid,ir,features),index in zip(irdb[offset:offset+num_split],range(num_split)):
 		f['data'][index] = numpy.array(ir).reshape((1,1,dimir))
 		f['nist_id'][index] = myid.encode('ascii')
 	for e,exidx in zip(extractors,range(len(extractors))):
 		label_name = 'label'+e.name
-		f.create_dataset(label_name,(n,1,1,1),dtype='f4')
-		for (myid,ir,features),index in zip(irdb[offset:offset+n],range(n)):
+		f.create_dataset(label_name,(num_split,1,1,1),dtype='f4')
+		for (myid,ir,features),index in zip(irdb[offset:offset+num_split],range(num_split)):
 			f[label_name][index] = numpy.array(features[exidx]).reshape((1,1,1))
-	offset += n
+	offset += num_split
