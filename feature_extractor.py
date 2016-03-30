@@ -12,7 +12,7 @@ class extractor(object):
 
 class or_extractor(extractor):
 	def __init__(self,name,*extractors):
-		super(or_extractor,self).__init__(name)
+		super().__init__(name)
 		self.extractors = extractors
 	def extract(self,myid):
 		inside = False
@@ -22,7 +22,7 @@ class or_extractor(extractor):
 
 class and_extractor(extractor):
 	def __init__(self,name,*extractors):
-		super(and_extractor,self).__init__(name)
+		super().__init__(name)
 		self.extractors = extractors
 	def extract(self,myid):
 		inside = True
@@ -32,7 +32,7 @@ class and_extractor(extractor):
 
 class substruct_searcher(extractor):
 	def __init__(self,name,substructure):
-		super(substruct_searcher,self).__init__(name)
+		super().__init__(name)
 		self.substructure = substructure
 	def extract(self,myid):
 		m = nist_id_to_rdkit_mol(myid)
@@ -40,4 +40,4 @@ class substruct_searcher(extractor):
 
 class smiles_searcher(substruct_searcher):
 	def __init__(self,name,smiles):
-		super(smiles_searcher,self).__init__(name,Chem.MolFromSmiles(smiles))
+		super().__init__(name,Chem.MolFromSmiles(smiles))
