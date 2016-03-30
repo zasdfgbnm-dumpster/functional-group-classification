@@ -10,7 +10,7 @@ layer {
 		batch_size: 60
 	}
 	top: "data"
-	top: "label"
+	top: "labelC2O"
 }
 layer {
 	name: "irdata"
@@ -23,7 +23,7 @@ layer {
 		batch_size: 60
 	}
 	top: "data"
-	top: "label"
+	top: "labelC2O"
 }
 layer {
   name: "conv1"
@@ -149,13 +149,13 @@ layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "ip2"
-  bottom: "label"
+  bottom: "labelC2O"
   top: "accuracy"
 }
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
   bottom: "ip2"
-  bottom: "label"
+  bottom: "labelC2O"
   top: "loss"
 }
