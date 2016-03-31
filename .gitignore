@@ -3,6 +3,7 @@ __pycache__
 *.caffemodel
 *.solverstate
 *.log
+*.pyc
 irnet-0.prototxt
 irnet-1.prototxt
 irnet-2.prototxt

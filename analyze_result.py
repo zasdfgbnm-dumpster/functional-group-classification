@@ -11,7 +11,7 @@ for i in range(3):
 	weight = '{}_iter_35000.caffemodel'.format(i)
 	testdbfn = 'data-{}.h5'.format(i)
 	overall_accuracy,paccuracy,naccuracy = run_test(net,weight,testdbfn)
-	print 'cross validation:',i,'\toverall accuracy:',overall_accuracy,'\t++ rate:' paccuracy,'\t-- rate': naccuracy
+	print 'cross validation:',i,'\toverall accuracy:',overall_accuracy,'\t++ rate:', paccuracy,'\t-- rate:', naccuracy
 	overall_accuracy_arr.append(overall_accuracy)
 	paccuracy_arr.append(paccuracy)
 	naccuracy.append(naccuracy)
