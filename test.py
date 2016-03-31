@@ -4,12 +4,12 @@ import h5py
 
 # modelfn = 'irnet.prototxt'
 # modelwfn = 'iter_35000.caffemodel'
-net = caffe.Net(modelfn,modelwfn,caffe.TEST)
 
 dbsize = 3000
 batchsize = 60
 
-def run_test(net,weight,testdbfn):
+def run_test(net,weight,testdbfn,label):
+	net = caffe.Net(net,weight,caffe.TEST)
 	testdb = h5py.File(testdbfn)
 	countpp = 0
 	countpn = 0
@@ -18,7 +18,7 @@ def run_test(net,weight,testdbfn):
 	count = 0
 	for i in range(dbsize/batchsize):
 		batch_data = testdb['data'][i*batchsize:(i+1)*batchsize]
-		batch_label_raw = testdb['label'][i*batchsize:(i+1)*batchsize]
+		batch_label_raw = testdb[label][i*batchsize:(i+1)*batchsize]
 		batch_label = [int(e[0][0][0]) for e in batch_label_raw]
 		net.blobs['data'].data[...] = batch_data
 		net.forward()

@@ -1,3 +1,4 @@
+caffe
 __pycache__
 *.h5
 *.caffemodel

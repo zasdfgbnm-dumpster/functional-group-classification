@@ -11,12 +11,12 @@ for cv in {0..2};do
 done
 
 #train the three net
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.0/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.0/lib64:/apps/caffe/build/lib
 for cv in {0..2};do
 	/apps/caffe/build/tools/caffe train --solver=solver-$cv.prototxt 2>&1|tee train-$cv.log
 done
 
 #analyze the result
-./analyze_result.py
+./analyze_result.py 2>/dev/null
 
 #clean up
