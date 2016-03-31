@@ -5,12 +5,13 @@ from test import run_test
 overall_accuracy_arr = []
 paccuracy_arr = []
 naccuracy_arr = []
+label=open('label').readline().strip()
 
 for i in range(3):
 	net = 'irnet-{}.prototxt'.format(i)
 	weight = '{}_iter_35000.caffemodel'.format(i)
 	testdbfn = 'data-{}.h5'.format(i)
-	overall_accuracy,paccuracy,naccuracy = run_test(net,weight,testdbfn,'labelC2O')
+	overall_accuracy,paccuracy,naccuracy = run_test(net,weight,testdbfn,label)
 	print 'cross validation:',i,'\toverall accuracy:',overall_accuracy,'\t++ rate:', paccuracy,'\t-- rate:', naccuracy
 	overall_accuracy_arr.append(overall_accuracy)
 	paccuracy_arr.append(paccuracy)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-label='labelC2O'
+label=$(cat label)
 
 #generate network and data file list for cross validation
 for cv in {0..2};do
