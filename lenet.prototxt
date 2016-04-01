@@ -128,7 +128,7 @@ layer {
   name: "ip2"
   type: "InnerProduct"
   bottom: "ip1"
-  top: "ip2"
+  top: "result"
   param {
     lr_mult: 1
   }
@@ -148,13 +148,13 @@ layer {
 layer {
 	name: "softmax"
 	type: "Softmax"
-	bottom: "ip2"
+	bottom: "result"
 	top: "softmax"
 }
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "ip2"
+  bottom: "result"
   bottom: "<label>"
   top: "accuracy"
 }

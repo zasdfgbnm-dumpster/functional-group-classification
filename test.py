@@ -23,7 +23,7 @@ def run_test(net,weight,testdbfn,label):
 		batch_label = [int(e[0][0][0]) for e in batch_label_raw]
 		net.blobs['data'].data[...] = batch_data
 		net.forward()
-		predicted_label_raw = net.blobs['ip2'].data
+		predicted_label_raw = net.blobs['result'].data
 		predicted_label = [ 0 if x[0]>x[1] else 1 for x in predicted_label_raw]
 		countpp = 0
 		countpn = 0
