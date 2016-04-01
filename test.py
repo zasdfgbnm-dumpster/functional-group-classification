@@ -42,11 +42,11 @@ def run_test(net,weight,testdbfn,label):
 		overall_accuracy   = 1.0 * (countpp+countnn)/count
 		paccuracy = 1.0 * countpp/(countpp+countpn)
 		naccuracy = 1.0 * countnn/(countnp+countnn)
-		return overall_accuracy,paccuracy,naccuracy
+	return overall_accuracy,paccuracy,naccuracy
 
 if __name__ == "__main__":
 	import sys
-	overall,paccuracy,naccuracy = run_test(sys.argv[1],sys.argv[2])
+	overall,paccuracy,naccuracy = run_test(sys.argv[1],sys.argv[2],sys.argv[3],open('label').readline().strip())
 	print 'overall accuracy:', 100 * overall,'%'
 	print '+ accuracy:', 100 * paccuracy,'%'
 	print '- accuracy:', 100 * naccuracy,'%'
