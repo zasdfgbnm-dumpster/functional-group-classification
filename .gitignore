@@ -5,6 +5,8 @@ __pycache__
 *.solverstate
 *.log
 *.pyc
+*.npy
+*.binaryproto
 irnet-0.prototxt
 irnet-1.prototxt
 irnet-2.prototxt
@@ -17,4 +19,3 @@ test-2.txt
 train-0.txt
 train-1.txt
 train-2.txt
-

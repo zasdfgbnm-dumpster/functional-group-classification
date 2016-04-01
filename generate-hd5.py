@@ -44,6 +44,13 @@ for x,y,features in irdb:
 for x,y in zip(extractors,counts):
 	print( x.name, y, 1.0*y/(num_total) )
 
+# write H for infogain loss
+for e,y in zip(extractors,counts):
+	h = numpy.eye(2,dtype='f4')
+	h[0][0] = 1.0*y/num_total
+	h[1][1] = 1.0*(num_total-y)/num_total
+	numpy.save('H_{}'.format(e.name),h)
+
 # write database
 offset = 0
 for i in range(num_pieces):
