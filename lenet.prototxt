@@ -146,6 +146,12 @@ layer {
   }
 }
 layer {
+	name: "softmax"
+	type: "Softmax"
+	bottom: "ip2"
+	top: "softmax"
+}
+layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "ip2"
@@ -153,9 +159,12 @@ layer {
   top: "accuracy"
 }
 layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "ip2"
+  bottom: "softmax"
   bottom: "<label>"
-  top: "loss"
+  top: "infoGainLoss"
+  name: "infoGainLoss"
+  type: "InfogainLoss"
+  infogain_loss_param {
+    source: "H_<label>.binaryproto"
+  }
 }

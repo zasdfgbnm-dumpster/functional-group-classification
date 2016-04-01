@@ -49,7 +49,7 @@ for e,y in zip(extractors,counts):
 	h = numpy.eye(2,dtype='f4')
 	h[0][0] = 1.0*y/num_total
 	h[1][1] = 1.0*(num_total-y)/num_total
-	numpy.save('H_{}'.format(e.name),h)
+	numpy.save('H_label{}'.format(e.name),h)
 
 # write database
 offset = 0
