@@ -25,4 +25,9 @@ lenet-2.prototxt
 lenet-solver-0.prototxt
 lenet-solver-1.prototxt
 lenet-solver-2.prototxt
-
+cifar10-0.prototxt
+cifar10-1.prototxt
+cifar10-2.prototxt
+cifar10-solver-0.prototxt
+cifar10-solver-1.prototxt
+cifar10-solver-2.prototxt
