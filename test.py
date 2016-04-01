@@ -53,15 +53,15 @@ def run_test(net,weight,testdbfn,label):
 		overall_accuracy   = 1.0 * (countpp+countnn)/count
 		paccuracy = 1.0 * countpp/(countpp+countpn)
 		naccuracy = 1.0 * countnn/(countnp+countnn)
-		print('batch number:',i,file=sys.stderr)
-		print('overall accuracy:', 100 * overall_accuracy,'%',file=sys.stderr)
-		print('+ accuracy:', 100 * paccuracy,'%',file=sys.stderr)
-		print('- accuracy:', 100 * naccuracy,'%',file=sys.stderr)
+		print >>sys.stderr, 'batch number:',i
+		print >>sys.stderr, 'overall accuracy:', 100 * overall_accuracy,'%'
+		print >>sys.stderr, '+ accuracy:', 100 * paccuracy,'%'
+		print >>sys.stderr, '- accuracy:', 100 * naccuracy,'%'
 	return overall_accuracy,paccuracy,naccuracy
 
 if __name__ == "__main__":
 	import sys
 	overall,paccuracy,naccuracy = run_test(sys.argv[1],sys.argv[2],sys.argv[3],open('label').readline().strip())
-	print('overall accuracy:', 100 * overall,'%')
-	print('+ accuracy:', 100 * paccuracy,'%')
-	print('- accuracy:', 100 * naccuracy,'%')
+	print 'overall accuracy:', 100 * overall,'%'
+	print '+ accuracy:', 100 * paccuracy,'%'
+	print '- accuracy:', 100 * naccuracy,'%'
