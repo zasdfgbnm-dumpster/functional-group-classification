@@ -57,9 +57,9 @@ def run_test(net,weight,testdbfn,label):
 		print >>sys.stderr, 'overall accuracy:', 100 * overall_accuracy,'%'
 		print >>sys.stderr, '+ accuracy:', 100 * paccuracy,'%'
 		print >>sys.stderr, '- accuracy:', 100 * naccuracy,'%'
-	totoverall_accuracy   = 1.0 * (countpp+countnn)/count
-	totpaccuracy = 1.0 * countpp/(countpp+countpn)
-	totnaccuracy = 1.0 * countnn/(countnp+countnn)
+	totoverall_accuracy   = 1.0 * (totcountpp+totcountnn)/totcount
+	totpaccuracy = 1.0 * totcountpp/(totcountpp+totcountpn)
+	totnaccuracy = 1.0 * totcountnn/(totcountnp+totcountnn)
 	return totoverall_accuracy,totpaccuracy,totnaccuracy
 
 if __name__ == "__main__":
