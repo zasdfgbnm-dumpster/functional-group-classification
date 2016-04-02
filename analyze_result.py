@@ -11,14 +11,15 @@ net=open('net').readline().strip()
 maxiter=0
 
 # read maxiter
-for i in open('{}-solver.prototxt'):
+for i in open('{}-solver.prototxt'.format(net)):
 	l = i.split(':')
-	if l[0].strip() == 'maxiter':
-		maxiter = int(l[1].strip())
+	if l[0].strip() == 'max_iter':
+		maxiter = int(l[1].split('#')[0].strip())
+		break
 
 for i in range(3):
 	netfn = '{}-{}.prototxt'.format(net,i)
-	weightfn = '{}_{}_iter_{}.caffemodel'.format(net,i)
+	weightfn = '{}_{}_iter_{}.caffemodel'.format(net,i,maxiter)
 	testdbfn = 'data-{}.h5'.format(i)
 	overall_accuracy,paccuracy,naccuracy = run_test(netfn,weightfn,testdbfn,label)
 	print 'cross validation:',i,'\toverall accuracy:',overall_accuracy,'\t++ rate:', paccuracy,'\t-- rate:', naccuracy
