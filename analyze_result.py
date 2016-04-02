@@ -5,12 +5,20 @@ from test import run_test
 overall_accuracy_arr = []
 paccuracy_arr = []
 naccuracy_arr = []
+
 label=open('label').readline().strip()
 net=open('net').readline().strip()
+maxiter=0
+
+# read maxiter
+for i in open('{}-solver.prototxt'):
+	l = i.split(':')
+	if l[0].strip() == 'maxiter':
+		maxiter = int(l[1].strip())
 
 for i in range(3):
 	netfn = '{}-{}.prototxt'.format(net,i)
-	weightfn = '{}_{}_iter_35000.caffemodel'.format(net,i)
+	weightfn = '{}_{}_iter_{}.caffemodel'.format(net,i)
 	testdbfn = 'data-{}.h5'.format(i)
 	overall_accuracy,paccuracy,naccuracy = run_test(netfn,weightfn,testdbfn,label)
 	print 'cross validation:',i,'\toverall accuracy:',overall_accuracy,'\t++ rate:', paccuracy,'\t-- rate:', naccuracy
