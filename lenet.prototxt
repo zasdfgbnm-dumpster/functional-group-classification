@@ -7,7 +7,7 @@ layer {
 	}
 	hdf5_data_param {
 		source: "train-<cv>.txt"
-		batch_size: 60
+		batch_size: 40
 	}
 	top: "data"
 	top: "<label>"
@@ -20,7 +20,7 @@ layer {
 	}
 	hdf5_data_param {
 		source: "test-<cv>.txt"
-		batch_size: 60
+		batch_size: 40
 	}
 	top: "data"
 	top: "<label>"
