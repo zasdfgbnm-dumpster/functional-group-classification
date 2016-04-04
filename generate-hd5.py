@@ -20,7 +20,7 @@ extractors = [
 ]
 
 # load db to memory and calculate features
-fdb = open('/home/gaoxiang/MEGA/shared/db1234-gas')
+fdb = open('/home/gaoxiang/MEGA/shared/db21-gas')
 irdb = []
 counts = [ 0 for x in extractors ]
 for i in fdb:
