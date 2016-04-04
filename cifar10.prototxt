@@ -59,7 +59,6 @@ layer {
   pooling_param {
     pool: MAX
     kernel_size: 3
-    stride: 2
   }
 }
 layer {
@@ -173,10 +172,10 @@ layer {
   }
 }
 layer {
-  name: "ip2"
+  name: "ip1"
   type: "InnerProduct"
   bottom: "pool3"
-  top: "result"
+  top: "ip1"
   param {
     lr_mult: 1
     decay_mult: 250
@@ -186,7 +185,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 10
+    num_output: 500
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -197,6 +196,42 @@ layer {
   }
 }
 layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "ip1"
+  top: "ip1"
+}
+layer {
+  name: "ip2"
+  type: "InnerProduct"
+  bottom: "ip1"
+  top: "result"
+  param {
+    lr_mult: 1
+    decay_mult: 250
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+        name: "softmax"
+        type: "Softmax"
+        bottom: "result"
+        top: "softmax"
+}
+layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "result"
@@ -204,9 +239,13 @@ layer {
   top: "accuracy"
 }
 layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "result"
+  bottom: "softmax"
   bottom: "<label>"
-  top: "loss"
+  top: "infoGainLoss"
+  name: "infoGainLoss"
+  type: "InfogainLoss"
+  infogain_loss_param {
+    source: "H_<label>.binaryproto"
+  }
 }
+
