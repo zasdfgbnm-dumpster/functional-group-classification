@@ -5,8 +5,8 @@ from feature_extractor import smiles_searcher,or_extractor
 from random import shuffle
 import numpy
 
-num_total = 12000
-num_split = 3000
+num_total = 8000
+num_split = 2000
 num_pieces = int(num_total/num_split)
 dimir = 759
 
@@ -20,7 +20,7 @@ extractors = [
 ]
 
 # load db to memory and calculate features
-fdb = open('/home/gaoxiang/MEGA/step18/db-18-shuf.txt')
+fdb = open('/home/gaoxiang/MEGA/shared/db1234-gas')
 irdb = []
 counts = [ 0 for x in extractors ]
 for i in fdb:
