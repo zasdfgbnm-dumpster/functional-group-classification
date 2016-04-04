@@ -6,8 +6,8 @@ import sys
 # modelfn = 'irnet.prototxt'
 # modelwfn = 'iter_35000.caffemodel'
 
-dbsize = 3000
-batchsize = 60
+dbsize = 2000
+batchsize = 40
 
 def run_test(net,weight,testdbfn,label):
 	net = caffe.Net(net,weight,caffe.TEST)
