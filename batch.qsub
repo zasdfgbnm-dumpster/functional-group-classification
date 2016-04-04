@@ -1,0 +1,6 @@
+#!/bin/bash
+#PBS -N train
+#PBS -l nodes=mordor:ppn=1:gpus=1,walltime=100:00:00
+
+cd $PBS_O_WORKDIR
+./train.sh
