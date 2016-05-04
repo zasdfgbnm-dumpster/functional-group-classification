@@ -50,9 +50,13 @@ def run_test(net,weight,testdbfn,label):
 		totcountnp += countnp
 		totcountnn += countnn
 		totcount += count
+		countn = countnp+countnn
+		countp = countpp+countpn
+		if countn == 0 or countp == 0:
+			continue
 		overall_accuracy   = 1.0 * (countpp+countnn)/count
-		paccuracy = 1.0 * countpp/(countpp+countpn)
-		naccuracy = 1.0 * countnn/(countnp+countnn)
+		paccuracy = 1.0 * countpp/countp
+		naccuracy = 1.0 * countnn/countn
 		print >>sys.stderr, 'batch number:',i
 		print >>sys.stderr, 'overall accuracy:', 100 * overall_accuracy,'%'
 		print >>sys.stderr, '+ accuracy:', 100 * paccuracy,'%'
